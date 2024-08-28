@@ -1,0 +1,77 @@
+#API -1
+post http://localhost:3000/register/
+Content-Type : application/json
+
+{
+  "username": "adam_richard",
+  "password": "richard_567",
+  "name": "Adam Richard",
+  "gender": "male"
+}
+
+#API -2
+post http://localhost:3000/login/
+Content-Type : application/json
+
+{
+  "username":"JoeBiden",
+  "password":"biden@123"
+}
+
+#API - 3
+get http://localhost:3000/user/tweets/feed/
+Authorization : Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJpYXQiOjE3MjQ0OTY1OTR9.UHzLCHrn_Q6CqLkctP4hwOZBrMvILaiqcM-NwW0Q5OM
+
+
+#API - 4
+get http://localhost:3000/user/following/
+Authorization : Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJpYXQiOjE3MjQ0OTY1OTR9.UHzLCHrn_Q6CqLkctP4hwOZBrMvILaiqcM-NwW0Q5OM
+
+#API - 5
+get http://localhost:3000/user/followers/
+Authorization : Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJpYXQiOjE3MjQ0OTY1OTR9.UHzLCHrn_Q6CqLkctP4hwOZBrMvILaiqcM-NwW0Q5OM
+
+#API - 6
+get http://localhost:3000/tweets/10/
+Authorization : Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJpYXQiOjE3MjQ0OTY1OTR9.UHzLCHrn_Q6CqLkctP4hwOZBrMvILaiqcM-NwW0Q5OM
+
+#API - 7
+get http://localhost:3000/tweets/2/likes/
+Authorization : Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJpYXQiOjE3MjQ0OTY1OTR9.UHzLCHrn_Q6CqLkctP4hwOZBrMvILaiqcM-NwW0Q5OM
+
+
+#API - 8
+get http://localhost:3000/tweets/2/replies/
+Authorization : Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJpYXQiOjE3MjQ0OTY1OTR9.UHzLCHrn_Q6CqLkctP4hwOZBrMvILaiqcM-NwW0Q5OM
+
+#API - 9
+get http://localhost:3000/user/tweets/
+Authorization : Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJpYXQiOjE3MjQ0OTY1OTR9.UHzLCHrn_Q6CqLkctP4hwOZBrMvILaiqcM-NwW0Q5OM
+
+#API - 10
+post http://localhost:3000/user/tweets/
+Authorization : Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJpYXQiOjE3MjQ0OTY1OTR9.UHzLCHrn_Q6CqLkctP4hwOZBrMvILaiqcM-NwW0Q5OM
+Content-Type: application/json
+
+{
+   "tweet": "The Mornings..."
+}
+
+#API - 11
+delete http://localhost:3000/tweets/3/
+Authorization : Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJpYXQiOjE3MjQ0OTY1OTR9.UHzLCHrn_Q6CqLkctP4hwOZBrMvILaiqcM-NwW0Q5OM
+
+ SELECT
+    t.tweet AS tweet,
+    COUNT( DISTINCT l.like_id) AS likes,
+    COUNT(r.reply_id) AS replies,
+    t.date_time As dateTime
+  FROM tweet AS t
+  LEFT JOIN like AS l
+    ON t.tweet_id = l.tweet_id
+  LEFT JOIN reply AS r
+    ON t.tweet_id = r.tweet_id
+  WHERE 
+    t.user_id = 2
+  GROUP BY 
+    t.tweet_id;
